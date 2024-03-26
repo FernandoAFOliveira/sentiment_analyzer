@@ -9,12 +9,21 @@ class MainGUI:
         self.master = master
         master.title('Sentiment Analysis Tool')
 
+        # Set initial size of the window
+        master.geometry("800x600")  # Width x Height
+
         # File selector module
         self.file_selector = FileSelector(master, self.update_plot)
+        self.file_selector.grid(row=0, column=0, sticky="nsew")
 
         # Plot display module
         self.plot_display = PlotDisplay(master)
-        self.plot_display.initialize_default_plot()
+        self.plot_display.grid(row=1, column=0, sticky="nsew")
+
+        # Set grid weights for responsiveness
+        master.grid_columnconfigure(0, weight=1)
+        master.grid_rowconfigure(0, weight=1)
+        master.grid_rowconfigure(1, weight=3)  # Adjust the weight to allocate more space to the plot
 
     def update_plot(self, df):
         # Update plot based on the new dataframe
